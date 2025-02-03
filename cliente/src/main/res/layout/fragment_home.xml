@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayoutHome"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.ui.fragment.HomeFragment">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/tbHome"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/navegacao_home" />
+
+    <Button
+        android:id="@+id/button"
+        style="@style/BotaoEndereco"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Avenida Paulista, 1090"
+        app:layout_constraintBottom_toBottomOf="@+id/tbHome"
+        app:layout_constraintEnd_toEndOf="@+id/tbHome"
+        app:layout_constraintStart_toStartOf="@+id/tbHome"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tbHome" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="vertical"
+            >
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvFiltroCategoria"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                tools:itemCount="15"
+                tools:layoutManager="GridLayoutManager"
+                tools:listitem="@layout/item_rv_filtro_categoria"
+                tools:spanCount="4" />
+
+            <com.denzcoskun.imageslider.ImageSlider
+                android:id="@+id/imageSlider"
+                android:layout_width="wrap_content"
+                android:layout_height="220dp"
+                app:iss_auto_cycle="true"
+                app:iss_corner_radius="20"
+                app:iss_delay="1000"
+                app:iss_period="5000"
+                app:iss_selected_dot="@drawable/ic_marcado_24"
+                app:iss_text_align="CENTER"
+                app:iss_unselected_dot="@drawable/ic_desmarcado_24" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Últimas lojas"
+                android:textSize="@dimen/titulo02"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvUltimasLojas"
+                android:layout_width="match_parent"
+                android:layout_height="129dp"
+                tools:itemCount="5"
+                tools:layoutManager="GridLayoutManager"
+                tools:listitem="@layout/item_rv_ultimas_lojas"
+                tools:spanCount="5" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lojas"
+                android:textSize="@dimen/titulo02"
+                android:textStyle="bold" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipFiltroOrdenacao"
+                    style="@style/Widget.MaterialComponents.Chip.ChipFiltro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ordenação"
+                    app:chipIcon="@drawable/ic_filtro_ordenacao_24" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipEntregaGratis"
+                    style="@style/Widget.MaterialComponents.Chip.ChipFiltro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Entrega Grátis"
+                    app:chipIcon="@drawable/ic_entrega_gratis_24" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipParaRetirar"
+                    style="@style/Widget.MaterialComponents.Chip.ChipFiltro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Para Retirar" />
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvLojas"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:listitem="@layout/item_rv_lojas" />
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

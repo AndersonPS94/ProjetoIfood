@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clUltimaLoja"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imageUltimaLoja"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/ImagemArredondada"
+        app:srcCompat="@drawable/mcdonalds" />
+
+    <TextView
+        android:id="@+id/textTituloUltimaLoja"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="MC Donalds"
+        app:layout_constraintEnd_toEndOf="@+id/imageUltimaLoja"
+        app:layout_constraintStart_toStartOf="@+id/imageUltimaLoja"
+        app:layout_constraintTop_toBottomOf="@+id/imageUltimaLoja" />
+</androidx.constraintlayout.widget.ConstraintLayout>

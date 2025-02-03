@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/clProdutoDestaqueLoja"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imageDestaqueLoja"
+        android:layout_width="120dp"
+        android:layout_height="100dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/cantosArredondados"
+        app:srcCompat="@drawable/gourmet" />
+
+    <TextView
+        android:id="@+id/textDescontoDestaqueLoja"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="R$ 99,90"
+        android:textSize="@dimen/titulo04"
+        app:layout_constraintStart_toStartOf="@+id/imageDestaqueLoja"
+        app:layout_constraintTop_toBottomOf="@+id/imageDestaqueLoja" />
+
+    <TextView
+        android:id="@+id/textPrecoDestaqueLoja"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="R$ 129.90"
+        android:textSize="@dimen/titulo05"
+        app:layout_constraintEnd_toEndOf="@+id/imageDestaqueLoja"
+        app:layout_constraintTop_toBottomOf="@+id/imageDestaqueLoja" />
+
+    <TextView
+        android:id="@+id/textNomeProdutoDestaqueLoja"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="São opções para 3 pessoas 1(um) McLanche Feliz e 2 (duas) MCOfertas"
+        android:textSize="@dimen/titulo05"
+        app:layout_constraintEnd_toEndOf="@+id/imageDestaqueLoja"
+        app:layout_constraintStart_toStartOf="@+id/imageDestaqueLoja"
+        app:layout_constraintTop_toBottomOf="@+id/textDescontoDestaqueLoja" />
+</androidx.constraintlayout.widget.ConstraintLayout>

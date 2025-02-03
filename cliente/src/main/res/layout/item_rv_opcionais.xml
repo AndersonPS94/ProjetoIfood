@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageOpcionalDetalhe"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5">
+
+        <TextView
+            android:id="@+id/textNomeOpcionalDetalhe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MéquiBox - 4 Mcofertas Médias"
+            android:textSize="@dimen/titulo03"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textDescricaoOpcionalDetalhe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="São 4 Mcofertas para você compartilhar com quem preferir"
+            android:textSize="@dimen/titulo04" />
+
+        <TextView
+            android:id="@+id/textPrecoOpcionalDetalhe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="R$ 136,80"
+            android:textSize="@dimen/titulo03"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageOpcionalDetalhe"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5"
+        app:srcCompat="@drawable/bebida" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/imageOpcionalDetalhe"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5">
+
+        <ImageButton
+            android:id="@+id/imageRemoverOpcional"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_remover_24" />
+
+        <TextView
+            android:id="@+id/textQuantidadeOpcional"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="0"
+            android:textSize="@dimen/titulo01" />
+
+        <ImageButton
+            android:id="@+id/imageAdicionarOpcional"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_adicionar_24" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

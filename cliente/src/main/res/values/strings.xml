@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">AulaIfood</string>
+    <string name="Entrar">Entrar</string>
+    <string name="Cadastrar">Cadastre-se</string>
+    <string name="erro_cadastro_nome">Digite um nome válido, com no mínimo 6 letras</string>
+    <string name="erro_cadastro_email">Digite um email válido</string>
+    <string name="erro_cadastro_senha">Digite uma senha válida, com no mínimo 6 caracteres</string>
+    <string name="erro_cadastro_telefone">Digite um telefone válido</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

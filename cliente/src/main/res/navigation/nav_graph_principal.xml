@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_principal"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.aulaifood.presentation.ui.fragment.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_lojaFragment"
+            app:destination="@id/lojaFragment"
+            app:enterAnim="@android:anim/slide_in_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/buscaFragment"
+        android:name="com.example.aulaifood.presentation.ui.fragment.BuscaFragment"
+        android:label="fragment_busca"
+        tools:layout="@layout/fragment_busca" />
+    <fragment
+        android:id="@+id/pedidosFragment"
+        android:name="com.example.aulaifood.presentation.ui.fragment.PedidosFragment"
+        android:label="fragment_pedidos"
+        tools:layout="@layout/fragment_pedidos" />
+    <fragment
+        android:id="@+id/perfilFragment"
+        android:name="com.example.aulaifood.presentation.ui.fragment.PerfilFragment"
+        android:label="fragment_perfil"
+        tools:layout="@layout/fragment_perfil" />
+    <fragment
+        android:id="@+id/lojaFragment"
+        android:name="com.example.aulaifood.presentation.ui.fragment.LojaFragment"
+        android:label="fragment_loja"
+        tools:layout="@layout/fragment_loja" >
+        <action
+            android:id="@+id/action_lojaFragment_to_produtoFragment"
+            app:destination="@id/produtoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/produtoFragment"
+        android:name="com.example.aulaifood.presentation.ui.fragment.ProdutoFragment"
+        android:label="fragment_produto"
+        tools:layout="@layout/fragment_produto" />
+</navigation>

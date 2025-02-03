@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.splash" parent="Theme.SplashScreen">
+
+        <item name="windowSplashScreenBackground">@color/primaria</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ifoodanimated</item>
+        <item name="android:windowSplashScreenBrandingImage">@drawable/logo_splash</item>
+
+
+
+        <item name="postSplashScreenTheme">@style/Theme.AulaIfood</item>
+
+    </style>
+
+</resources>

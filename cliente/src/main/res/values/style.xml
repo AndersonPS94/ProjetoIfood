@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="BotaoEndereco" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:textColor">@color/preto</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/titulo03</item>
+        <item name="android:drawableRight">@drawable/ic_seta_baixo_24</item>
+    </style>
+
+    <style name="cantosArredondados">
+        <item name="cornerSize">10%</item>
+    </style>
+    <style name="ImagemArredondada">
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="Widget.MaterialComponents.Chip.ChipFiltro" parent="@style/Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/alternar_fundo_filtro</item>
+        <item name="chipCornerRadius">20dp</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipStrokeColor">@color/cinza</item>
+        <item name="chipIconEnabled">true</item>
+        <item name="chipIconVisible">true</item>
+
+    </style>
+
+</resources>
