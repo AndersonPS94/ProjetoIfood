@@ -7,108 +7,116 @@
     android:layout_height="match_parent"
     tools:context=".presentation.ui.fragment.ProdutoFragment">
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:orientation="vertical"
+        android:fillViewport="true"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="200dp">
-
-            <ImageView
-                android:id="@+id/imageCapaProduto"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/capa_destaque_produto"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5" />
-
-            <ImageButton
-                android:id="@+id/btnProdutoVoltar"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/forma_arredondada"
-                android:src="@drawable/ic_voltar_24"
-                app:layout_constraintStart_toStartOf="@+id/imageCapaProduto"
-                app:layout_constraintTop_toTopOf="@+id/imageCapaProduto" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            tools:layout_editor_absoluteX="211dp">
 
-            <TextView
-                android:id="@+id/textNomeProdutoDetalhe"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="MCOferta Média Novo Brabo Clubhouse"
-                android:textSize="@dimen/titulo02"
-                android:textStyle="bold" />
+                android:layout_height="200dp">
 
-            <TextView
-                android:id="@+id/textDescriçãoProdutoDetalhe"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Dois hamburgueres de carne 100% Bovina, méquinese, a exclusiva maionese especial com sabor de carne defumada"
-                android:textSize="@dimen/titulo03" />
+                <ImageView
+                    android:id="@+id/imageCapaProduto"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/capa_destaque_produto"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5" />
 
-            <TextView
-                android:id="@+id/textPrecoPodutoDetalhe"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="R$ 40,90"
-                android:textSize="@dimen/titulo02"
-                android:textStyle="bold" />
+                <ImageButton
+                    android:id="@+id/btnProdutoVoltar"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/forma_arredondada"
+                    android:src="@drawable/ic_voltar_24"
+                    app:layout_constraintStart_toStartOf="@+id/imageCapaProduto"
+                    app:layout_constraintTop_toTopOf="@+id/imageCapaProduto" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:background="@color/cinza_claro"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="16dp">
 
                 <TextView
-                    android:id="@+id/textView13"
+                    android:id="@+id/textNomeProdutoDetalhe"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="4dp"
-                    android:text="Escolha opcionais"
+                    android:text="MCOferta Média Novo Brabo Clubhouse"
                     android:textSize="@dimen/titulo02"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textView14"
+                    android:id="@+id/textDescriçãoProdutoDetalhe"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="4dp"
-                    android:text="Selecione as opções abaixo para complementar:"
+                    android:text="Dois hamburgueres de carne 100% Bovina, méquinese, a exclusiva maionese especial com sabor de carne defumada"
                     android:textSize="@dimen/titulo03" />
+
+                <TextView
+                    android:id="@+id/textPrecoPodutoDetalhe"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="R$ 40,90"
+                    android:textSize="@dimen/titulo02"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@color/cinza_claro"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView13"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:text="Escolha opcionais"
+                        android:textSize="@dimen/titulo02"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textView14"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:text="Selecione as opções abaixo para complementar:"
+                        android:textSize="@dimen/titulo03" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvOpcionaisProdutoDetalhe"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    tools:listitem="@layout/item_rv_opcionais" />
             </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvOpcionaisProdutoDetalhe"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:listitem="@layout/item_rv_opcionais" />
         </LinearLayout>
 
-    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -156,7 +164,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/btnAdicionarProdutoCarrinho"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

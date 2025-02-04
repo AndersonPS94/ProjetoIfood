@@ -97,10 +97,14 @@ class LojaFragment : Fragment() {
 
 
     private fun inicializarEventosClique() {
+        val navController = findNavController()
         binding.btnLojaVoltar.setOnClickListener {
-            val navController = findNavController()
             navController.navigate(R.id.homeFragment)
         }
-    }
 
+        binding.btnVerItensFinalizarPedido.setOnClickListener {
+                navController.navigate(R.id.action_lojaFragment_to_finalizarPedidosFragment)
+
+        }
+    }
 }
