@@ -89,7 +89,7 @@
                     </LinearLayout>
 
                     <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/imageView4"
+                        android:id="@+id/imageLojaPedidoHistorico"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:scaleType="centerCrop"

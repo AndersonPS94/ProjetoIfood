@@ -19,7 +19,11 @@
         android:id="@+id/buscaFragment"
         android:name="com.example.aulaifood.presentation.ui.fragment.BuscaFragment"
         android:label="fragment_busca"
-        tools:layout="@layout/fragment_busca" />
+        tools:layout="@layout/fragment_busca" >
+        <action
+            android:id="@+id/action_buscaFragment_to_lojaFragment"
+            app:destination="@id/lojaFragment" />
+    </fragment>
     <fragment
         android:id="@+id/pedidosFragment"
         android:name="com.example.aulaifood.presentation.ui.fragment.PedidosFragment"

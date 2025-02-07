@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <style name="cantosArredondados">
+        <item name="cornerSize">10%</item>
+    </style>
+    <style name="ImagemArredondada">
+        <item name="cornerSize">50%</item>
+    </style>
+
+
+</resources>

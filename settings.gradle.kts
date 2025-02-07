@@ -23,3 +23,4 @@ dependencyResolutionManagement {
 rootProject.name = "AulaIfood"
 include(":cliente")
 include(":core")
+include(":loja")

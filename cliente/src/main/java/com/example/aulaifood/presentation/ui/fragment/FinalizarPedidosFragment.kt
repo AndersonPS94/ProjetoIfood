@@ -25,8 +25,6 @@ class finalizarPedidosFragment : Fragment() {
         Produto("McFlurry Kitkat Triple Chocolate","Sobremesa composta por bebida láctea sabor chocolate, cobertura sabor chocolate e tablete de Kitkat Triple Chocolate","R$ 22,50","","https://static.ifood-static.com.br/image/upload/t_medium/pratos/a3d94597-96f3-4efe-8aaa-16e04e75bfae/202412030508_mh1h6b5hpvs.png"),
         )
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

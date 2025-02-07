@@ -2,10 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("com.google.gms.google-services")
-
     id("kotlin-kapt")
-    id("com.google.dagger.hilt.android")
-}
+    id("com.google.dagger.hilt.android")}
 
 android {
     namespace = "com.example.aulaifood"
@@ -13,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.aulaifood"
-        minSdk = 35
+        minSdk = 34
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -85,6 +83,9 @@ dependencies {
 
     //Picasso
     implementation("com.squareup.picasso:picasso:2.8")
+
+    // lib permissoes
+    implementation("com.guolindev.permissionx:permissionx:1.8.1")
     //Slider
     implementation("com.github.denzcoskun:ImageSlideshow:0.1.2")
 
