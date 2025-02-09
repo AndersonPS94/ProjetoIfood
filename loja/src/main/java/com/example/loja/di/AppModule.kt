@@ -2,9 +2,12 @@ package com.example.loja.di
 
 import com.example.loja.data.remote.firebase.repository.AutenticacaoRepositoryImpl
 import com.example.loja.data.remote.firebase.repository.IAutenticacaoRepository
+import com.example.loja.data.remote.firebase.repository.ILojaRepository
+import com.example.loja.data.remote.firebase.repository.LojaRepositoryImpl
 import com.example.loja.data.remote.firebase.repository.UploadRepository
 import com.example.loja.domain.usecase.AutenticacaoUseCase
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import dagger.Module
 import dagger.Provides
@@ -23,9 +26,10 @@ object AppModule {
 
     @Provides
     fun provideAutenticacaoRepository(
-        firebaseAuth: FirebaseAuth
+        firebaseAuth: FirebaseAuth,
+        firebaseFirestore: FirebaseFirestore
     ): IAutenticacaoRepository {
-        return AutenticacaoRepositoryImpl(firebaseAuth)
+        return AutenticacaoRepositoryImpl(firebaseAuth, firebaseFirestore)
     }
 
     @Provides
@@ -34,6 +38,13 @@ object AppModule {
         firebaseAuth: FirebaseAuth
     ): UploadRepository {
         return UploadRepository(firebaseStorage, firebaseAuth)
+    }
+    @Provides
+    fun provideLojaRepository(
+        firebaseFirestore: FirebaseFirestore,
+        firebaseAuth: FirebaseAuth
+    ): ILojaRepository {
+        return LojaRepositoryImpl(firebaseFirestore, firebaseAuth)
     }
 
     @Provides
@@ -45,5 +56,10 @@ object AppModule {
     @Provides
     fun provideFirebaseStorage() : FirebaseStorage {
         return FirebaseStorage.getInstance()
+    }
+
+    @Provides
+    fun provideFirebaseFirestore () : FirebaseFirestore {
+        return FirebaseFirestore.getInstance()
     }
 }

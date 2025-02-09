@@ -3,6 +3,8 @@ package com.example.loja.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.UIStatus
+import com.example.loja.data.remote.firebase.repository.ILojaRepository
+import com.example.loja.data.remote.firebase.repository.LojaRepositoryImpl
 import com.example.loja.data.remote.firebase.repository.UploadRepository
 import com.example.loja.domain.model.UploadLoja
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -12,7 +14,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LojaViewModel @Inject constructor(
-    private val uploadRepository: UploadRepository
+    private val uploadRepository: UploadRepository,
+    private val lojaRepositoryImpl: ILojaRepository
 ): ViewModel() {
 
     fun uploadImagem(
@@ -29,6 +32,13 @@ class LojaViewModel @Inject constructor(
                 val uiStatusUpload = upload.await()
                 if (uiStatusUpload is UIStatus.Sucesso) {
                     val urlImagem = uiStatusUpload.dados
+                    val campo: Map<String, Any>
+                    if (uploadLoja.nomeImagem == "imagem_perfil") {
+                            campo = mapOf("urlPerfil" to urlImagem)
+                    }else {
+                        campo = mapOf("urlCapa" to urlImagem)
+                    }
+                    lojaRepositoryImpl.atualizarCampo(campo, uiStatus)
                     uiStatus.invoke(UIStatus.Sucesso(true))
                 }else {
                     uiStatus.invoke(UIStatus.Erro("Erro ao fazer upload da imagem"))

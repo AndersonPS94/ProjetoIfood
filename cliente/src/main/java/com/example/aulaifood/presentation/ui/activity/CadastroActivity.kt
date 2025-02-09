@@ -97,7 +97,7 @@ class CadastroActivity : AppCompatActivity() {
                         is UIStatus.Erro -> {
 
                         }
-                        UIStatus.carregando -> {}
+                        is UIStatus.carregando -> {}
                     }
                 }
             }

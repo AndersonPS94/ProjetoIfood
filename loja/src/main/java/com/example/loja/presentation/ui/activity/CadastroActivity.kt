@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.core.AlertaCarregamento
 import com.example.core.UIStatus
 import com.example.core.esconderTeclado
+import com.example.core.exibirMensagem
 import com.example.core.navegarPara
 import com.example.loja.R
 import com.example.loja.databinding.ActivityCadastroBinding
@@ -17,20 +18,16 @@ import dagger.hilt.android.AndroidEntryPoint
 class CadastroActivity : AppCompatActivity() {
 
     private val binding by lazy {
-        ActivityCadastroBinding.inflate(layoutInflater)
+        ActivityCadastroBinding.inflate( layoutInflater )
     }
-
     private val alertaCarregamento by lazy {
         AlertaCarregamento(this)
     }
-
     private val autenticacaoViewModel: AutenticacaoViewModel by viewModels()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        setContentView(binding.root)
+        setContentView( binding.root )
         inicializar()
     }
 
@@ -39,51 +36,45 @@ class CadastroActivity : AppCompatActivity() {
         inicializarEventosClique()
         inicializarObservaveis()
     }
-    private fun inicializarToolbar() {
-        val toolbar = binding.includeTbPrincipal.tbPrincipalLoja
-        setSupportActionBar(toolbar)
 
-        supportActionBar?.apply {
-            title = "Cadastro da Loja"
-            setDisplayHomeAsUpEnabled(true)
-        }
-    }
     private fun inicializarObservaveis() {
 
-        autenticacaoViewModel.carregando.observe(this){carregando ->
-            if (carregando) {
-                alertaCarregamento.exibir("Fazendo o seu Cadastro!")
-            }else {
+        autenticacaoViewModel.carregando.observe(this){ carregando ->
+            if( carregando ){
+                alertaCarregamento.exibir("Fazendo seu cadastro!")
+            }else{
                 alertaCarregamento.fechar()
             }
         }
 
         autenticacaoViewModel.resultadoValidacao
-            .observe(this) { resultadoValidacao ->
-                with(binding) {
+            .observe(this){ resultadoValidacao ->
+                with( binding ){
 
                     editCadastroNome.error =
-                        if (resultadoValidacao.nome) null else getString(R.string.erro_cadastro_nome)
+                        if(resultadoValidacao.nome) null else getString(R.string.erro_cadastro_nome)
 
                     editCadastroEmail.error =
-                        if (resultadoValidacao.email) null else getString(R.string.erro_cadastro_email)
+                        if(resultadoValidacao.email) null else getString(R.string.erro_cadastro_email)
 
                     editCadastroSenha.error =
-                        if (resultadoValidacao.senha) null else getString(R.string.erro_cadastro_senha)
+                        if(resultadoValidacao.senha) null else getString(R.string.erro_cadastro_senha)
 
                     editCadastroTelefone.error =
-                        if (resultadoValidacao.telefone) null else getString(R.string.erro_cadastro_telefone)
-                }
+                        if(resultadoValidacao.telefone) null else getString(R.string.erro_cadastro_telefone)
 
+                }
             }
+
     }
 
     private fun inicializarEventosClique() {
-        with(binding) {
+        with( binding ){
             btnCadastrar.setOnClickListener { view ->
+
                 view.esconderTeclado()
 
-                //remover focus
+                //Remover Focus
                 editCadastroNome.clearFocus()
                 editCadastroEmail.clearFocus()
                 editCadastroSenha.clearFocus()
@@ -97,18 +88,31 @@ class CadastroActivity : AppCompatActivity() {
                 val usuario = Usuario(
                     email, senha, nome, telefone
                 )
-                autenticacaoViewModel.cadastrarUsuario(usuario){uiStatus ->
-                    when(uiStatus){
+                autenticacaoViewModel.cadastrarUsuario( usuario ){ uiStatus ->
+                    when( uiStatus ){
                         is UIStatus.Sucesso -> {
-                            navegarPara(HomeActivity::class.java)
+                            navegarPara( HomeActivity::class.java )
                         }
                         is UIStatus.Erro -> {
+                            exibirMensagem( uiStatus.erro )
                         }
-
                         UIStatus.carregando -> {}
                     }
                 }
+
             }
         }
     }
+
+    private fun inicializarToolbar() {
+        val toolbar = binding.includeTbPrincipal.tbPrincipalLoja
+        setSupportActionBar( toolbar )
+
+        supportActionBar?.apply {
+            title = "Cadastro de Loja"
+            setDisplayHomeAsUpEnabled(true)
+        }
+
+    }
+
 }
