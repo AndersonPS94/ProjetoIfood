@@ -1,7 +1,7 @@
 package com.example.loja.data.remote.firebase.repository
 
-import com.example.loja.domain.model.Usuario
 import com.example.core.UIStatus
+import com.example.loja.domain.model.Usuario
 
 interface IAutenticacaoRepository {
     suspend fun cadastrarUsuario (

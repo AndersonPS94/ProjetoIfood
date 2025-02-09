@@ -1,7 +1,7 @@
 package com.example.loja.data.remote.firebase.repository
 
-import com.example.loja.domain.model.Usuario
 import com.example.core.UIStatus
+import com.example.loja.domain.model.Usuario
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException

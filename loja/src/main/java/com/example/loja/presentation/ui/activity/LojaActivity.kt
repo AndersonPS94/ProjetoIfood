@@ -1,13 +1,19 @@
 package com.example.loja.presentation.ui.activity
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.core.AlertaCarregamento
+import com.example.core.UIStatus
 import com.example.core.exibirMensagem
 import com.example.core.navegarPara
 import com.example.loja.databinding.ActivityLojaBinding
+import com.example.loja.domain.model.UploadLoja
+import com.example.loja.presentation.viewmodel.LojaViewModel
+import com.example.loja.util.Constantes
 import com.permissionx.guolindev.PermissionX
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,6 +27,8 @@ class LojaActivity : AppCompatActivity() {
     private val alertaCarregamento by lazy {
         AlertaCarregamento(this)
     }
+
+    private val lojaViewModel : LojaViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +48,7 @@ class LojaActivity : AppCompatActivity() {
     ){uri ->
         if (uri != null){
             binding.imageCapaLoja.setImageURI(uri)
+            uploadImagemCapa(uri)
         }else {
             exibirMensagem("Nenhuma imagem selecionada")
         }
@@ -50,8 +59,65 @@ class LojaActivity : AppCompatActivity() {
     ){uri ->
         if (uri != null){
             binding.imagePerfilLoja.setImageURI(uri)
+            uploadImagemPerfil(uri)
         }else {
             exibirMensagem("Nenhuma imagem selecionada")
+        }
+    }
+
+    private fun uploadImagemCapa(uri: Uri) {
+
+        lojaViewModel.uploadImagem(
+            UploadLoja(
+                Constantes.STORAGE_LOJAS,
+                "imagem_capa",
+                uri
+            )
+        ){
+                UIStatus ->
+            when(UIStatus){
+                is UIStatus.Sucesso -> {
+                    alertaCarregamento.fechar()
+                    exibirMensagem("imagem de capa atualizada com sucesso")
+                }
+                is UIStatus.Erro -> {
+                    alertaCarregamento.fechar()
+                    exibirMensagem(UIStatus.erro)
+                }
+
+                is UIStatus.carregando -> {
+                    alertaCarregamento.exibir("Fazendo upload da imagem de capa")
+
+                }
+            }
+        }
+    }
+
+    private fun uploadImagemPerfil(uri: Uri) {
+
+        lojaViewModel.uploadImagem(
+            UploadLoja(
+                Constantes.STORAGE_LOJAS,
+                "imagem_perfil",
+                uri
+            )
+        ){
+            UIStatus ->
+            when(UIStatus){
+                is UIStatus.Sucesso -> {
+                    alertaCarregamento.fechar()
+                    exibirMensagem("imagem de perfil atualizada com sucesso")
+                }
+                is UIStatus.Erro -> {
+                    alertaCarregamento.fechar()
+                    exibirMensagem(UIStatus.erro)
+                }
+
+                is UIStatus.carregando -> {
+                    alertaCarregamento.exibir("Fazendo upload da imagem de perfil")
+
+                }
+            }
         }
     }
 
@@ -83,7 +149,8 @@ class LojaActivity : AppCompatActivity() {
             .onForwardToSettings{scope, permissoesNegadas ->
                 scope.showForwardToSettingsDialog(
                     permissoesNegadas,
-                    "Você precisa conceder as permissoes necessarias manualmente em configurações",
+                    "Você precisa conceder as permissoes necessarias" +
+                            " manualmente em configurações",
                     "Abrir configurações",
                     "Cancelar"
                 )
@@ -101,7 +168,8 @@ class LojaActivity : AppCompatActivity() {
                 navegarPara(HomeActivity::class.java)
             }
             btnSelecionarImagemCapa.setOnClickListener {
-                selecionarImagemCapa.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+                selecionarImagemCapa.launch(PickVisualMediaRequest(ActivityResultContracts
+                    .PickVisualMedia.ImageOnly))
             }
             btnSelecionarImgPerfil.setOnClickListener {
                 selecionarImagemPerfil.launch(
@@ -113,6 +181,7 @@ class LojaActivity : AppCompatActivity() {
             btnAtualizar.setOnClickListener {}
         }
     }
+
     private fun inicializarObservaveis() {
 
     }

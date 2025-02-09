@@ -14,7 +14,6 @@ import com.example.core.UIStatus
 import com.example.core.esconderTeclado
 import com.example.core.exibirMensagem
 import com.example.core.navegarPara
-import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -113,6 +112,8 @@ class LoginActivity : AppCompatActivity() {
                         is UIStatus.Erro -> {
                             exibirMensagem(uiStatus.erro)
                         }
+                        UIStatus.carregando -> {}
+
                     }
                 }
             }
