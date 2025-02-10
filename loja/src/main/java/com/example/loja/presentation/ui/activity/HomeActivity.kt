@@ -46,7 +46,10 @@ class HomeActivity : AppCompatActivity() {
                         navegarPara(LojaActivity::class.java)
                     }
 
-                    R.id.item_cardapio -> {}
+                    R.id.item_cardapio -> {
+                        navegarPara(CardapioActivity::class.java, false)
+                    }
+
                     R.id.item_taxa_enredeco -> {}
                     R.id.item_sair -> {
                         autenticacaoViewModel.deslogarUsuario()

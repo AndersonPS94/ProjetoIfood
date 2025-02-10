@@ -18,7 +18,7 @@ fun Activity.exibirMensagem(mensagem: String) {
     Toast.makeText(this, mensagem, Toast.LENGTH_LONG).show()
 }
 
-fun <T>Activity.navegarPara(destino: Class<T>) {
+fun <T>Activity.navegarPara(destino: Class<T>, finalizar : Boolean = true) {
         startActivity(
             Intent(applicationContext, destino)
         )
