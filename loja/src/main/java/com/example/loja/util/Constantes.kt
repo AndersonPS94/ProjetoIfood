@@ -6,4 +6,5 @@ object Constantes {
 
     //FirebaseFirestore
     const val FIRESTORE_LOJAS = "Lojas"
+    const val FIRESTORE_CATEGORIAS = "Categorias"
 }
