@@ -12,5 +12,6 @@ interface ILojaRepository {
 
     suspend fun recuperarDadosLoja( uiStatus: (UIStatus<Loja>) -> Unit)
     suspend fun recuperarCategorias( uiStatus: (UIStatus<List<Categoria>>) -> Unit)
+    suspend fun atualizarLoja(loja: Loja, uiStatus: (UIStatus<Boolean>) -> Unit)
 
 }

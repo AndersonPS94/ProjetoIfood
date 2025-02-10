@@ -9,9 +9,11 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.core.AlertaCarregamento
 import com.example.core.UIStatus
+import com.example.core.esconderTeclado
 import com.example.core.exibirMensagem
 import com.example.core.navegarPara
 import com.example.loja.databinding.ActivityLojaBinding
+import com.example.loja.domain.model.Categoria
 import com.example.loja.domain.model.Loja
 import com.example.loja.domain.model.UploadLoja
 import com.example.loja.presentation.viewmodel.LojaViewModel
@@ -34,6 +36,7 @@ class LojaActivity : AppCompatActivity() {
     private val lojaViewModel : LojaViewModel by viewModels()
 
     private lateinit var spinnerAdapter: ArrayAdapter<String>
+    private lateinit var listaCategorias : List<Categoria>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,11 +82,23 @@ class LojaActivity : AppCompatActivity() {
                         exibirMensagem(uiStatus.erro)
                     }
                     is UIStatus.Sucesso -> {
+                            listaCategorias = uiStatus.dados
+                        val listaSpinnerCategorias = mutableListOf("Selecione uma categoria")
+                        listaSpinnerCategorias.addAll(
+                            listaCategorias.map {it.nome}
+                        )
 
+
+                            spinnerAdapter.clear()
+                            spinnerAdapter.addAll(listaSpinnerCategorias)
                     }
                     UIStatus.carregando -> {
                         spinnerAdapter.clear()
                         spinnerAdapter.addAll(mutableListOf("Carregando..."))
+
+                        //Marcacao da categoria selecionada
+                        val posicaoSpinner = listaCategorias.indexOfFirst { it.id == idCategoria }
+                        binding.spinnerCategoriaLoja.setSelection(posicaoSpinner + 1)
                     }
                 }
             }
@@ -133,7 +148,7 @@ class LojaActivity : AppCompatActivity() {
             mutableListOf()
             )
 
-        binding.spinnerCategoriaLoja.adapter
+        binding.spinnerCategoriaLoja.adapter = spinnerAdapter
     }
 
     private val selecionarImagemCapa = registerForActivityResult(
@@ -271,7 +286,55 @@ class LojaActivity : AppCompatActivity() {
                     )
                 )
             }
-            btnAtualizar.setOnClickListener {}
+            btnAtualizar.setOnClickListener { view ->
+                view.esconderTeclado()
+
+                //Remover Focus
+                editNomeLoja.clearFocus()
+                editRazaoSocialLoja.clearFocus()
+                editCnpjLoja.clearFocus()
+                editSobreLoja.clearFocus()
+                editTelefoneLoja.clearFocus()
+
+                val nome = editNomeLoja.text.toString()
+                val razaoSocial = editRazaoSocialLoja.text.toString()
+                val cnpj = editCnpjLoja.text.toString()
+                val sobre= editSobreLoja.text.toString()
+                val telefone = editTelefoneLoja.text.toString()
+
+                var idCategoria = ""
+                var categoria = ""
+                val posicaoSelecionada = spinnerCategoriaLoja.selectedItemPosition
+                if (posicaoSelecionada > 0){
+                    val categoriaSelecionada = listaCategorias[posicaoSelecionada - 1]
+                    idCategoria = categoriaSelecionada.id
+                    categoria = categoriaSelecionada.nome
+                }
+
+                val loja = Loja(
+                "",idCategoria,categoria,nome,razaoSocial,cnpj,sobre,telefone)
+                
+                atualizarLoja(loja)
+            }
+        }
+    }
+
+    private fun atualizarLoja(loja: Loja) {
+        lojaViewModel.atualizarLoja(loja) { uiStatus ->
+            when (uiStatus) {
+                is UIStatus.Erro -> {
+                    alertaCarregamento.fechar()
+                    exibirMensagem(uiStatus.erro)
+                }
+
+                is UIStatus.Sucesso -> {
+                    alertaCarregamento.fechar()
+                    exibirMensagem("Loja atualizada com sucesso")
+                }
+                UIStatus.carregando -> {
+                    alertaCarregamento.exibir("Atualizando loja")
+                }
+            }
         }
     }
 
