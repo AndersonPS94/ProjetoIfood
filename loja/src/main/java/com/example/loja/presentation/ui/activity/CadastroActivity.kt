@@ -112,7 +112,5 @@ class CadastroActivity : AppCompatActivity() {
             title = "Cadastro de Loja"
             setDisplayHomeAsUpEnabled(true)
         }
-
     }
-
 }

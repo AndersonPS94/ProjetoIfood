@@ -1,13 +1,10 @@
 package com.example.loja.presentation.ui.activity
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.loja.R
+import com.example.core.navegarPara
 import com.example.loja.databinding.ActivityCardapioBinding
 import com.example.loja.domain.model.Produto
 import com.example.loja.presentation.ui.adapter.ProdutosAdapter
@@ -44,6 +41,15 @@ class CardapioActivity : AppCompatActivity() {
     private fun inicializar() {
         inicializarProdutos()
         inicializarToolbar()
+        inicializarEventosClique()
+    }
+
+    private fun inicializarEventosClique() {
+        with(binding){
+            fabAdicionarProduto.setOnClickListener {
+                navegarPara(CadastroProdutoActivity::class.java)
+            }
+        }
     }
 
     private fun inicializarToolbar() {
@@ -59,7 +65,11 @@ class CardapioActivity : AppCompatActivity() {
     private fun inicializarProdutos() {
         with(binding){
             produtosAdapter = ProdutosAdapter(
-                {},{},{}
+                {
+                    navegarPara(CadastroOpcionaisActivity::class.java, false)
+                },{
+                    navegarPara(CadastroProdutoActivity::class.java, false)
+                }, {},
             )
             produtosAdapter.adicionarLista(produtos)
             rvCardapio.adapter = produtosAdapter

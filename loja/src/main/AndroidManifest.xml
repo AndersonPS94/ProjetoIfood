@@ -17,9 +17,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AulaIfood">
         <activity
-            android:name=".presentation.ui.activity.CardapioActivity"
-            android:parentActivityName=".presentation.ui.activity.HomeActivity"
+            android:name=".presentation.ui.activity.CadastroOpcionaisActivity"
+            android:parentActivityName=".presentation.ui.activity.CardapioActivity"
             android:exported="false" />
+        <activity
+            android:name=".presentation.ui.activity.CadastroProdutoActivity"
+            android:parentActivityName=".presentation.ui.activity.CardapioActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.ui.activity.CardapioActivity"
+            android:exported="false"
+            android:parentActivityName=".presentation.ui.activity.HomeActivity" />
         <activity
             android:name=".presentation.ui.activity.LojaActivity"
             android:exported="false" />
