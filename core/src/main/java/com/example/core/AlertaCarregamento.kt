@@ -9,9 +9,12 @@ class AlertaCarregamento(
     private val context: Context
 ) {
 
-    private val viewCarregamento = View.inflate(context, R.layout.layout_carregamento, null)
+    private var viewCarregamento : View? = null
     private var alertDialog: AlertDialog? = null
     fun exibir(titulo: String) {
+
+        viewCarregamento = View.inflate(context, R.layout.layout_carregamento, null)
+
         val alertBuilder = AlertDialog.Builder(context)
             .setTitle(titulo)
             .setView(viewCarregamento)
@@ -22,10 +25,6 @@ class AlertaCarregamento(
     }
 
     fun fechar(){
-        alertDialog?.setOnDismissListener {
-            val viewGroup = viewCarregamento.parent as ViewGroup
-            viewGroup.removeView(viewCarregamento)
-        }
         alertDialog?.dismiss()
     }
 }

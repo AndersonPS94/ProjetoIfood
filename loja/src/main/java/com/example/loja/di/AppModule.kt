@@ -3,7 +3,11 @@ package com.example.loja.di
 import com.example.loja.data.remote.firebase.repository.AutenticacaoRepositoryImpl
 import com.example.loja.data.remote.firebase.repository.IAutenticacaoRepository
 import com.example.loja.data.remote.firebase.repository.ILojaRepository
+import com.example.loja.data.remote.firebase.repository.IOpcionalRepository
+import com.example.loja.data.remote.firebase.repository.IProdutoRepository
 import com.example.loja.data.remote.firebase.repository.LojaRepositoryImpl
+import com.example.loja.data.remote.firebase.repository.OpcionalRepositoryImpl
+import com.example.loja.data.remote.firebase.repository.ProdutoRepositoryImpl
 import com.example.loja.data.remote.firebase.repository.UploadRepository
 import com.example.loja.domain.usecase.AutenticacaoUseCase
 import com.google.firebase.auth.FirebaseAuth
@@ -45,6 +49,23 @@ object AppModule {
         firebaseAuth: FirebaseAuth
     ): ILojaRepository {
         return LojaRepositoryImpl(firebaseFirestore, firebaseAuth)
+    }
+
+    @Provides
+    fun provideProdutoRepository(
+        firebaseAuth: FirebaseAuth,
+        firebaseFirestore: FirebaseFirestore
+
+    ): IProdutoRepository {
+        return ProdutoRepositoryImpl(firebaseAuth, firebaseFirestore)
+    }
+
+    @Provides
+    fun provideOpcionalRepository(
+        firebaseAuth: FirebaseAuth,
+        firebaseFirestore: FirebaseFirestore
+    ): IOpcionalRepository {
+        return OpcionalRepositoryImpl(firebaseAuth, firebaseFirestore)
     }
 
     @Provides

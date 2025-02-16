@@ -2,8 +2,9 @@ package com.example.loja.domain.model
 
 import android.net.Uri
 
-data class UploadLoja(
-    val nomeLoja: String,
+data class UploadStorage(
+
+    val local: String,
     val nomeImagem: String,
     val uriImagem: Uri
 )

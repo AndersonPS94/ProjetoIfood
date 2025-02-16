@@ -9,5 +9,6 @@
 
     <color name="primaria">#EA1D2D</color>
     <color name="secundaria_clara">#FF969E</color>
+    <color name="amarelo_claro">#FEDB86</color>
 
 </resources>

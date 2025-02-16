@@ -4,11 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.UIStatus
 import com.example.loja.data.remote.firebase.repository.ILojaRepository
-import com.example.loja.data.remote.firebase.repository.LojaRepositoryImpl
 import com.example.loja.data.remote.firebase.repository.UploadRepository
 import com.example.loja.domain.model.Categoria
 import com.example.loja.domain.model.Loja
-import com.example.loja.domain.model.UploadLoja
+import com.example.loja.domain.model.UploadStorage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -41,21 +40,21 @@ class LojaViewModel @Inject constructor(
     }
 
     fun uploadImagem(
-        uploadLoja: UploadLoja,
+        uploadStorage: UploadStorage,
         uiStatus: (UIStatus<Boolean>) -> Unit
     ) {
         uiStatus.invoke(UIStatus.carregando)
             viewModelScope.launch {
                 val upload = async {
                     uploadRepository.upload(
-                        uploadLoja.nomeImagem, uploadLoja.nomeImagem, uploadLoja.uriImagem
+                        uploadStorage.nomeImagem, uploadStorage.nomeImagem, uploadStorage.uriImagem
                     )
                 }
                 val uiStatusUpload = upload.await()
                 if (uiStatusUpload is UIStatus.Sucesso) {
                     val urlImagem = uiStatusUpload.dados
                     val campo: Map<String, Any>
-                    if (uploadLoja.nomeImagem == "imagem_perfil") {
+                    if (uploadStorage.nomeImagem == "imagem_perfil") {
                             campo = mapOf("urlPerfil" to urlImagem)
                     }else {
                         campo = mapOf("urlCapa" to urlImagem)

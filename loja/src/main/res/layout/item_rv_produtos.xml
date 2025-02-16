@@ -70,4 +70,15 @@
                 app:srcCompat="@drawable/ic_remover_24" />
         </LinearLayout>
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textDestaqueprodutoLoja"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/titulo05"
+        android:background="@color/amarelo_claro"
+        android:text="Destaque"
+        app:layout_constraintBottom_toBottomOf="@+id/imageProdutoLoja"
+        app:layout_constraintEnd_toEndOf="@+id/imageProdutoLoja"
+        app:layout_constraintStart_toStartOf="@+id/imageProdutoLoja" />
 </androidx.constraintlayout.widget.ConstraintLayout>
