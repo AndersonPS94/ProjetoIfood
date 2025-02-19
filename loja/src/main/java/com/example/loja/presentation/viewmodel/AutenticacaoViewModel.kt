@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.UIStatus
-import com.example.loja.data.remote.firebase.repository.IAutenticacaoRepository
+import com.example.loja.data.remote.firebase.repository.autenticacao.IAutenticacaoRepository
 import com.example.loja.domain.model.Usuario
 import com.example.loja.domain.usecase.AutenticacaoUseCase
 import com.example.loja.domain.usecase.ResultadoValidacao

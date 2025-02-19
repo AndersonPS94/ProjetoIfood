@@ -1,7 +1,7 @@
 package com.example.loja.domain.model
 
 data class Opcional(
-    val id: String = "",
+    var id: String = "",
     val idProduto: String = "",
     val nome: String = "",
     val descricao: String = "",

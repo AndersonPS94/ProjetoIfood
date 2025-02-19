@@ -1,9 +1,9 @@
-package com.example.loja.data.remote.firebase.repository
+package com.example.loja.data.remote.firebase.repository.autenticacao
 
 import com.example.core.UIStatus
 import com.example.loja.domain.model.Loja
 import com.example.loja.domain.model.Usuario
-import com.example.loja.util.Constantes
+import com.example.loja.util.ConstantesFirebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
@@ -36,7 +36,7 @@ class AutenticacaoRepositoryImpl @Inject constructor(
                idLoja = idLoja ,nome = usuario.nome, telefone = usuario.telefone
             )
             val refLoja = firebaseFirestore
-                .collection(Constantes.FIRESTORE_LOJAS)
+                .collection(ConstantesFirebase.FIRESTORE_LOJAS)
                 .document(idLoja)
 
                 refLoja.set(loja).await()

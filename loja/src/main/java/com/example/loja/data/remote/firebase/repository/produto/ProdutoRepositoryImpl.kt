@@ -1,8 +1,8 @@
-package com.example.loja.data.remote.firebase.repository
+package com.example.loja.data.remote.firebase.repository.produto
 
 import com.example.core.UIStatus
 import com.example.loja.domain.model.Produto
-import com.example.loja.util.Constantes
+import com.example.loja.util.ConstantesFirebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
@@ -23,7 +23,7 @@ class ProdutoRepositoryImpl @Inject constructor(
                 ?: return uiStatus.invoke(UIStatus.Erro("Usuário não logado"))
 
             val refProduto = firebaseFirestore
-                .collection(Constantes.FIRESTORE_PRODUTOS)
+                .collection(ConstantesFirebase.FIRESTORE_PRODUTOS)
                 .document(idLoja)
                 .collection("itens")
                 .document()
@@ -49,7 +49,7 @@ class ProdutoRepositoryImpl @Inject constructor(
                 ?: return uiStatus.invoke(UIStatus.Erro("Usuário não logado"))
 
             val refProduto = firebaseFirestore
-                .collection(Constantes.FIRESTORE_PRODUTOS)
+                .collection(ConstantesFirebase.FIRESTORE_PRODUTOS)
                 .document(idLoja)
                 .collection("itens")
                 .document(produto.id)
@@ -71,7 +71,7 @@ class ProdutoRepositoryImpl @Inject constructor(
                 ?: return uiStatus.invoke(UIStatus.Erro("Usuário não logado"))
 
             val refProdutos = firebaseFirestore
-                .collection(Constantes.FIRESTORE_PRODUTOS)
+                .collection(ConstantesFirebase.FIRESTORE_PRODUTOS)
                 .document(idLoja)
                 .collection("itens")
 
@@ -100,7 +100,7 @@ class ProdutoRepositoryImpl @Inject constructor(
                 ?: return uiStatus.invoke(UIStatus.Erro("Usuário não logado"))
 
             val refProduto = firebaseFirestore
-                .collection(Constantes.FIRESTORE_PRODUTOS)
+                .collection(ConstantesFirebase.FIRESTORE_PRODUTOS)
                 .document(idLoja)
                 .collection("itens")
                 .document(idProduto)
@@ -129,7 +129,7 @@ class ProdutoRepositoryImpl @Inject constructor(
 
 
             val refProduto = firebaseFirestore
-                .collection(Constantes.FIRESTORE_PRODUTOS)
+                .collection(ConstantesFirebase.FIRESTORE_PRODUTOS)
                 .document(idLoja)
                 .collection("itens")
                 .document(idProduto)

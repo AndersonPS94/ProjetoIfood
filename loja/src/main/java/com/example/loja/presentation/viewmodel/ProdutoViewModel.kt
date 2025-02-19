@@ -3,15 +3,13 @@ package com.example.loja.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.UIStatus
-import com.example.loja.data.remote.firebase.repository.IProdutoRepository
-import com.example.loja.data.remote.firebase.repository.UploadRepository
-import com.example.loja.domain.model.Categoria
+import com.example.loja.data.remote.firebase.repository.produto.IProdutoRepository
+import com.example.loja.data.remote.firebase.repository.upload.UploadRepository
 import com.example.loja.domain.model.Produto
 import com.example.loja.domain.model.UploadStorage
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import org.checkerframework.checker.guieffect.qual.UI
 import javax.inject.Inject
 
 @HiltViewModel

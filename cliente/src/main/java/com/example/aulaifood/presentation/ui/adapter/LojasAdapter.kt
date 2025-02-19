@@ -28,9 +28,9 @@ class LojasAdapter(
             with(binding) {
                 textTituloLoja.text = loja.nome
                 textCategoriaLoja.text = loja.categoria
-                if (loja.urlImagem.isNotEmpty()) {
+                if (loja.urlPerfil.isNotEmpty()) {
                     Picasso.get()
-                        .load(loja.urlImagem)
+                        .load(loja.urlPerfil)
                         .into(imageLoja)
                 }
                 clLoja.setOnClickListener {
@@ -46,9 +46,9 @@ class LojasAdapter(
         fun bind(loja: Loja) {
             with(binding) {
                 textTituloUltimaLoja.text = loja.nome
-                if (loja.urlImagem.isNotEmpty()) {
+                if (loja.urlPerfil.isNotEmpty()) {
                     Picasso.get()
-                        .load(loja.urlImagem)
+                        .load(loja.urlPerfil)
                         .into(imageUltimaLoja)
                 }
                 clUltimaLoja.setOnClickListener {

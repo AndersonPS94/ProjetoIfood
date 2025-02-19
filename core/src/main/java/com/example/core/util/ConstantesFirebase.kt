@@ -1,6 +1,6 @@
 package com.example.loja.util
 
-object Constantes {
+object ConstantesFirebase {
     //FirebaseStorage
     const val STORAGE_LOJAS = "lojas"
     const val STORAGE_PRODUTOS = "produtos"

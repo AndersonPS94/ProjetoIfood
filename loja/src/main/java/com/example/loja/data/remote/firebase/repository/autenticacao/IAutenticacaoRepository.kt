@@ -1,4 +1,4 @@
-package com.example.loja.data.remote.firebase.repository
+package com.example.loja.data.remote.firebase.repository.autenticacao
 
 import com.example.core.UIStatus
 import com.example.loja.domain.model.Usuario

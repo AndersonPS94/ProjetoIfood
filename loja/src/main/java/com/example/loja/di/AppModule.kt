@@ -1,14 +1,14 @@
 package com.example.loja.di
 
-import com.example.loja.data.remote.firebase.repository.AutenticacaoRepositoryImpl
-import com.example.loja.data.remote.firebase.repository.IAutenticacaoRepository
-import com.example.loja.data.remote.firebase.repository.ILojaRepository
-import com.example.loja.data.remote.firebase.repository.IOpcionalRepository
-import com.example.loja.data.remote.firebase.repository.IProdutoRepository
-import com.example.loja.data.remote.firebase.repository.LojaRepositoryImpl
-import com.example.loja.data.remote.firebase.repository.OpcionalRepositoryImpl
-import com.example.loja.data.remote.firebase.repository.ProdutoRepositoryImpl
-import com.example.loja.data.remote.firebase.repository.UploadRepository
+import com.example.loja.data.remote.firebase.repository.autenticacao.AutenticacaoRepositoryImpl
+import com.example.loja.data.remote.firebase.repository.autenticacao.IAutenticacaoRepository
+import com.example.loja.data.remote.firebase.repository.loja.ILojaRepository
+import com.example.loja.data.remote.firebase.repository.opcional.IOpcionalRepository
+import com.example.loja.data.remote.firebase.repository.produto.IProdutoRepository
+import com.example.loja.data.remote.firebase.repository.loja.LojaRepositoryImpl
+import com.example.loja.data.remote.firebase.repository.opcional.OpcionalRepositoryImpl
+import com.example.loja.data.remote.firebase.repository.produto.ProdutoRepositoryImpl
+import com.example.loja.data.remote.firebase.repository.upload.UploadRepository
 import com.example.loja.domain.usecase.AutenticacaoUseCase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore

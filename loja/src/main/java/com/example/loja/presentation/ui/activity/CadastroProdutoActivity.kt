@@ -16,7 +16,7 @@ import com.example.loja.databinding.ActivityCadastroProdutoBinding
 import com.example.loja.domain.model.Produto
 import com.example.loja.domain.model.UploadStorage
 import com.example.loja.presentation.viewmodel.ProdutoViewModel
-import com.example.loja.util.Constantes
+import com.example.loja.util.ConstantesFirebase
 import com.jamiltondamasceno.core.adicionarMascaraMoeda
 import com.jamiltondamasceno.core.formatarComoMoeda
 import com.jamiltondamasceno.core.moedaToDouble
@@ -184,7 +184,7 @@ class CadastroProdutoActivity : AppCompatActivity() {
 
         produtoViewModel.uploadImagem(
             UploadStorage(
-                Constantes.STORAGE_PRODUTOS,
+                ConstantesFirebase.STORAGE_PRODUTOS,
                 UUID.randomUUID().toString(),
                 uri
             ), idProduto

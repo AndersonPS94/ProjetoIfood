@@ -1,9 +1,9 @@
-package com.example.loja.data.remote.firebase.repository
+package com.example.loja.data.remote.firebase.repository.loja
 
 import com.example.core.UIStatus
 import com.example.loja.domain.model.Categoria
 import com.example.loja.domain.model.Loja
-import com.example.loja.util.Constantes
+import com.example.loja.util.ConstantesFirebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
@@ -23,7 +23,7 @@ class LojaRepositoryImpl @Inject constructor(
             return uiStatus.invoke(UIStatus.Erro("Usuário não logado"))
 
             val refLoja = firebaseFirestore
-                .collection(Constantes.FIRESTORE_LOJAS)
+                .collection(ConstantesFirebase.FIRESTORE_LOJAS)
                 .document(idLoja)
             refLoja.update(loja.toMap()).await()
 
@@ -46,7 +46,7 @@ class LojaRepositoryImpl @Inject constructor(
             return uiStatus.invoke(UIStatus.Erro("Usuário não logado"))
 
             val refLoja = firebaseFirestore
-                .collection(Constantes.FIRESTORE_LOJAS)
+                .collection(ConstantesFirebase.FIRESTORE_LOJAS)
                 .document(idLoja)
 
             refLoja.update(campo).await()
@@ -68,7 +68,7 @@ class LojaRepositoryImpl @Inject constructor(
             return uiStatus.invoke(UIStatus.Erro("Usuário não logado"))
 
             val refLoja = firebaseFirestore
-                .collection(Constantes.FIRESTORE_LOJAS)
+                .collection(ConstantesFirebase.FIRESTORE_LOJAS)
                 .document(idLoja)
 
             val documentSnapshot = refLoja.get().await()
@@ -93,7 +93,7 @@ class LojaRepositoryImpl @Inject constructor(
         try {
 
             val refCategorias = firebaseFirestore
-                .collection(Constantes.FIRESTORE_CATEGORIAS)
+                .collection(ConstantesFirebase.FIRESTORE_CATEGORIAS)
 
 
             val querySnapshot = refCategorias.get().await()

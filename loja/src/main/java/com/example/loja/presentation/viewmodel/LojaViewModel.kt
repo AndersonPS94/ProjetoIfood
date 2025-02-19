@@ -3,8 +3,8 @@ package com.example.loja.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.UIStatus
-import com.example.loja.data.remote.firebase.repository.ILojaRepository
-import com.example.loja.data.remote.firebase.repository.UploadRepository
+import com.example.loja.data.remote.firebase.repository.loja.ILojaRepository
+import com.example.loja.data.remote.firebase.repository.upload.UploadRepository
 import com.example.loja.domain.model.Categoria
 import com.example.loja.domain.model.Loja
 import com.example.loja.domain.model.UploadStorage

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.aulaifood.data.remote.firebase.repository.IAutenticacaoRepository
+import com.example.aulaifood.data.remote.firebase.repository.autenticacao.IAutenticacaoRepository
 import com.example.aulaifood.domain.model.Usuario
 import com.example.aulaifood.domain.usecase.AutenticacaoUseCase
 import com.example.aulaifood.domain.usecase.ResultadoValidacao

@@ -40,7 +40,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textTituloLoja" />
 
     <TextView
-        android:id="@+id/textCategoriaLoja"
+        android:id="@+id/textCategoriaLojas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -54,8 +54,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="1km"
-        app:layout_constraintStart_toEndOf="@+id/textCategoriaLoja"
-        app:layout_constraintTop_toTopOf="@+id/textCategoriaLoja" />
+        app:layout_constraintStart_toEndOf="@+id/textCategoriaLojas"
+        app:layout_constraintTop_toTopOf="@+id/textCategoriaLojas" />
 
     <TextView
         android:id="@+id/textTempoEntregaLoja"

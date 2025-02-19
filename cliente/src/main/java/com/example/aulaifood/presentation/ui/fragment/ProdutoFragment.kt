@@ -12,8 +12,9 @@ import com.example.aulaifood.R
 import com.example.aulaifood.databinding.FragmentProdutoBinding
 import com.example.aulaifood.domain.model.Opcional
 import com.example.aulaifood.presentation.ui.adapter.OpicionaisAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class ProdutoFragment : Fragment() {
 
     private lateinit var binding: FragmentProdutoBinding

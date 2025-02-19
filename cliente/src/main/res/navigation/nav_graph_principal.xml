@@ -45,6 +45,9 @@
         <action
             android:id="@+id/action_lojaFragment_to_finalizarPedidosFragment"
             app:destination="@id/finalizarPedidosFragment" />
+        <argument
+            android:name="loja"
+            app:argType="com.example.aulaifood.domain.model.Loja" />
     </fragment>
     <fragment
         android:id="@+id/produtoFragment"

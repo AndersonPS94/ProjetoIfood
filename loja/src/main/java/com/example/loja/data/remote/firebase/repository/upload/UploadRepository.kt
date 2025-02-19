@@ -1,4 +1,4 @@
-package com.example.loja.data.remote.firebase.repository
+package com.example.loja.data.remote.firebase.repository.upload
 
 import android.net.Uri
 import com.example.core.UIStatus

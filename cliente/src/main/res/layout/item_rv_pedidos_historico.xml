@@ -43,7 +43,7 @@
                     android:orientation="horizontal">
 
                     <com.google.android.material.imageview.ShapeableImageView
-                        android:id="@+id/imageLojaPedidoHistorico"
+                        android:id="@+id/imagePerfilLoja"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:scaleType="centerCrop"

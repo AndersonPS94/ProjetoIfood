@@ -1,4 +1,4 @@
-package com.example.aulaifood.data.remote.firebase.repository
+package com.example.aulaifood.data.remote.firebase.repository.autenticacao
 
 import com.example.aulaifood.domain.model.Usuario
 import com.example.core.UIStatus

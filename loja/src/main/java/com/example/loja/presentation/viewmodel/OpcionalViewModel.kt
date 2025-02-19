@@ -3,8 +3,8 @@ package com.example.loja.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core.UIStatus
-import com.example.loja.data.remote.firebase.repository.IOpcionalRepository
-import com.example.loja.data.remote.firebase.repository.UploadRepository
+import com.example.loja.data.remote.firebase.repository.opcional.IOpcionalRepository
+import com.example.loja.data.remote.firebase.repository.upload.UploadRepository
 import com.example.loja.domain.model.Opcional
 import com.example.loja.domain.model.UploadStorage
 
@@ -18,6 +18,26 @@ class OpcionalViewModel  @Inject constructor(
     private val uploadRepository: UploadRepository,
     private val opcionalRepository: IOpcionalRepository
 ): ViewModel() {
+
+    fun remover (
+        opcional: Opcional,
+        uiStatus: (UIStatus<Boolean>) -> Unit
+    ){
+        uiStatus.invoke(UIStatus.carregando)
+        viewModelScope.launch {
+            opcionalRepository.remover(opcional, uiStatus)
+        }
+    }
+
+    fun listar(
+        idProduto: String,
+        uiStatus: (UIStatus<List<Opcional>>) -> Unit
+    ){
+        uiStatus.invoke(UIStatus.carregando)
+        viewModelScope.launch {
+            opcionalRepository.listar(idProduto, uiStatus)
+        }
+    }
 
     fun salvar(
         uploadStorage: UploadStorage,
@@ -38,8 +58,8 @@ class OpcionalViewModel  @Inject constructor(
 
                 val urlImagem = uiStatusUpload.dados
                 opcional.url = urlImagem
+                opcionalRepository.salvar(opcional, uiStatus)
 
-                uiStatus.invoke(UIStatus.Sucesso(""))
             }else {
                 uiStatus.invoke(UIStatus.Erro("Erro ao salvar dados"))
             }

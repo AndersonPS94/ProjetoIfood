@@ -2,13 +2,11 @@ package com.example.loja.presentation.ui.activity
 
 import android.net.Uri
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.core.AlertaCarregamento
@@ -22,7 +20,8 @@ import com.example.loja.domain.model.Produto
 import com.example.loja.domain.model.UploadStorage
 import com.example.loja.presentation.ui.adapter.OpicionaisAdapter
 import com.example.loja.presentation.viewmodel.OpcionalViewModel
-import com.example.loja.util.Constantes
+import com.example.loja.util.ConstantesFirebase
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.jamiltondamasceno.core.adicionarMascaraMoeda
 import com.jamiltondamasceno.core.formatarComoMoeda
 import com.jamiltondamasceno.core.moedaToDouble
@@ -125,6 +124,13 @@ class CadastroOpcionaisActivity : AppCompatActivity() {
             solicitarPermissoes()
     }
 
+    override fun onStart() {
+        super.onStart()
+        produto?.let { produto ->
+            recuperarOpcionais(produto.id)
+        }
+    }
+
     private fun solicitarPermissoes() {
         val listaPermissoes = mutableListOf<String>()
 
@@ -215,7 +221,7 @@ class CadastroOpcionaisActivity : AppCompatActivity() {
 
         uriOpcional?.let { uri ->
             opcionalViewModel.salvar(
-                UploadStorage(Constantes.STORAGE_OPCIONAIS, UUID.randomUUID().toString(), uri), opcional
+                UploadStorage(ConstantesFirebase.STORAGE_OPCIONAIS, UUID.randomUUID().toString(), uri), opcional
             ){ uiStatus ->
                 when(uiStatus){
                     is UIStatus.Erro ->{
@@ -224,6 +230,10 @@ class CadastroOpcionaisActivity : AppCompatActivity() {
                     }
                     is UIStatus.Sucesso ->{
                         alertaCarregamento.fechar()
+                        limparDadosOpcional()
+                        produto?.let { produto ->
+                            recuperarOpcionais(produto.id)
+                        }
                         exibirMensagem("Opcional salvo com sucesso")
 
                     }
@@ -231,6 +241,42 @@ class CadastroOpcionaisActivity : AppCompatActivity() {
                 }
 
             }
+        }
+    }
+
+    private fun recuperarOpcionais(idProduto: String) {
+        opcionalViewModel.listar(idProduto){uiStatus ->
+            when(uiStatus) {
+                is UIStatus.Erro -> {
+                    alertaCarregamento.fechar()
+                    exibirMensagem(uiStatus.erro)
+                }
+
+                is UIStatus.Sucesso -> {
+                    alertaCarregamento.fechar()
+                    val listaOpcional = uiStatus.dados
+                    opcionaisAdapter.adicionarLista(listaOpcional)
+
+                }
+
+                is UIStatus.carregando -> {
+                    alertaCarregamento.exibir("Recuperando opcionais")
+                }
+            }
+        }
+    }
+
+    private fun limparDadosOpcional() {
+        uriOpcional = null
+        with(binding){
+            editNomeOpcional.setText("")
+            editDescricaoOpcional.setText("")
+            editPrecoOpcional.setText("")
+            imageCapaOpcional.setImageDrawable(
+                ContextCompat.getDrawable(
+                    applicationContext, R.drawable.nao_disponivel
+                )
+            )
         }
     }
 
@@ -271,7 +317,7 @@ class CadastroOpcionaisActivity : AppCompatActivity() {
     private fun inicializarOpcionais() {
         with(binding){
             opcionaisAdapter = OpicionaisAdapter{opcional ->
-
+                confirmarExclusao(opcional)
             }
             opcionaisAdapter.adicionarLista(opcionais)
             rvOpcionais.adapter = opcionaisAdapter
@@ -279,6 +325,38 @@ class CadastroOpcionaisActivity : AppCompatActivity() {
         }
     }
 
+    private fun confirmarExclusao(opcional: Opcional) {
+        MaterialAlertDialogBuilder(this)
+            .setTitle("Deseja excluir o opcional?")
+            .setMessage("[${opcional.nome}] - [${opcional.preco.formatarComoMoeda()}]")
+            .setNegativeButton("Cancelar"){dialog, _ ->
+                dialog.dismiss()
+            }
+            .setPositiveButton("Excluir"){dialog, _ ->
+                removerOpcional(opcional)
+                dialog.dismiss()
+            }
+    }
+
+    private fun removerOpcional(opcional: Opcional) {
+        opcionalViewModel.remover(opcional) { uiStatus ->
+            when (uiStatus) {
+                is UIStatus.Erro -> {
+                    alertaCarregamento.fechar()
+                    exibirMensagem(uiStatus.erro)
+                }
+
+                is UIStatus.Sucesso -> {
+                    alertaCarregamento.fechar()
+                   recuperarOpcionais(opcional.idProduto)
+                }
+
+                UIStatus.carregando -> {
+                    alertaCarregamento.exibir("Removendo opcional")
+                }
+            }
+        }
+    }
     private fun inicializarToolbar() {
         val toolbar = binding.includeTbOpcionais.tbPrincipalLoja
         setSupportActionBar(toolbar)

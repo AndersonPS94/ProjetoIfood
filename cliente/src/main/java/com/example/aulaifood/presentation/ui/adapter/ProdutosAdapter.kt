@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.example.aulaifood.databinding.ItemRvDestaquesLojaBinding
 import com.example.aulaifood.databinding.ItemRvProdutosLojaBinding
 import com.example.aulaifood.domain.model.Produto
+import com.jamiltondamasceno.core.formatarComoMoeda
 import com.squareup.picasso.Picasso
 
 class ProdutosAdapter(
@@ -26,8 +27,8 @@ class ProdutosAdapter(
         fun bind(produto: Produto) {
             with(binding){
             textNomeProdutoDestaqueLoja.text = produto.nome
-            textPrecoDestaqueLoja.text = produto.preco
-            textDescontoDestaqueLoja.text = produto.precoDesconto
+            textPrecoDestaqueLoja.text = produto.preco.formatarComoMoeda()
+            textDescontoDestaqueLoja.text = produto.precoDestaque.formatarComoMoeda()
                 if (produto.url.isNotEmpty()) {
                     Picasso.get()
                         .load(produto.url)
@@ -47,7 +48,7 @@ class ProdutosAdapter(
             with(binding){
                 textNomeProdutoLoja.text = produto.nome
                 textDescricaoProdutoLoja.text = produto.descricao
-                textPrecoProdutoLoja.text = produto.preco
+                textPrecoProdutoLoja.text = produto.preco.formatarComoMoeda()
                 if (produto.url.isNotEmpty()) {
                     Picasso.get()
                         .load(produto.url)

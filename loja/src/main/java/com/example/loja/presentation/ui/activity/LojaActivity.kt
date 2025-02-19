@@ -17,7 +17,7 @@ import com.example.loja.domain.model.Categoria
 import com.example.loja.domain.model.Loja
 import com.example.loja.domain.model.UploadStorage
 import com.example.loja.presentation.viewmodel.LojaViewModel
-import com.example.loja.util.Constantes
+import com.example.loja.util.ConstantesFirebase
 import com.permissionx.guolindev.PermissionX
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
@@ -177,7 +177,7 @@ class LojaActivity : AppCompatActivity() {
 
         lojaViewModel.uploadImagem(
             UploadStorage(
-                Constantes.STORAGE_LOJAS,
+                ConstantesFirebase.STORAGE_LOJAS,
                 "imagem_capa",
                 uri
             )
@@ -205,7 +205,7 @@ class LojaActivity : AppCompatActivity() {
 
         lojaViewModel.uploadImagem(
             UploadStorage(
-                Constantes.STORAGE_LOJAS,
+                ConstantesFirebase.STORAGE_LOJAS,
                 "imagem_perfil",
                 uri
             )
