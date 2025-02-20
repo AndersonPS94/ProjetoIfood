@@ -6,7 +6,9 @@ import com.example.aulaifood.data.remote.firebase.repository.loja.ILojaRepositor
 import com.example.aulaifood.data.remote.firebase.repository.loja.LojaRepositoryImpl
 import com.example.aulaifood.data.remote.firebase.repository.produto.IProdutoRepository
 import com.example.aulaifood.data.remote.firebase.repository.produto.ProdutoRepositoryImpl
+import com.example.aulaifood.data.remote.firebase.repository.upload.UploadRepository
 import com.example.aulaifood.domain.usecase.AutenticacaoUseCase
+import com.example.aulaifood.domain.usecase.produto.RecuperarProdutosPorTipoUseCase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -27,9 +29,10 @@ object AppModule {
 
     @Provides
     fun provideAutenticacaoRepository(
-        firebaseAuth: FirebaseAuth
+        firebaseAuth: FirebaseAuth,
+        firebaseFirestore: FirebaseFirestore
     ): IAutenticacaoRepository {
-        return AutenticacaoRepositoryImpl(firebaseAuth)
+        return AutenticacaoRepositoryImpl(firebaseAuth,firebaseFirestore)
     }
 
     @Provides
@@ -44,6 +47,23 @@ object AppModule {
         firebaseFirestore: FirebaseFirestore
     ): IProdutoRepository {
         return ProdutoRepositoryImpl(firebaseFirestore)
+    }
+
+    @Provides
+    fun provideUploadRepository(
+        firebaseStorage: FirebaseStorage,
+        firebaseAuth: FirebaseAuth
+    ): UploadRepository
+    {
+        return UploadRepository(firebaseStorage, firebaseAuth)
+    }
+
+    @Provides
+    fun providesRecuperarProdutosPorTipoUseCase(
+        produtoRepositoryImpl: IProdutoRepository
+    ): RecuperarProdutosPorTipoUseCase {
+        return RecuperarProdutosPorTipoUseCase(produtoRepositoryImpl)
+
     }
 
 

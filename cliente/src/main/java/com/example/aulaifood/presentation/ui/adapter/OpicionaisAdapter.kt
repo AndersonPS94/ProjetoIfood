@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aulaifood.databinding.ItemRvOpcionaisBinding
 import com.example.aulaifood.domain.model.Opcional
+import com.jamiltondamasceno.core.formatarComoMoeda
 import com.squareup.picasso.Picasso
 
 class OpicionaisAdapter : RecyclerView.Adapter<OpicionaisAdapter.OpcionaisViewHolder>() {
@@ -21,7 +22,7 @@ class OpicionaisAdapter : RecyclerView.Adapter<OpicionaisAdapter.OpcionaisViewHo
                 with(binding) {
                     textNomeOpcionalDetalhe.text = opcional.nome
                     textDescricaoOpcionalDetalhe.text = opcional.descricao
-                    textPrecoOpcionalDetalhe.text = opcional.preco
+                    textPrecoOpcionalDetalhe.text = opcional.preco.formatarComoMoeda()
                     if (opcional.url.isNotEmpty()) {
                         Picasso.get()
                             .load(opcional.url)

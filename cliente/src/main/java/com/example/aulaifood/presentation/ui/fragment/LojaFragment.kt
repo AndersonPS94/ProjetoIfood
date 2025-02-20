@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.aulaifood.R
 import com.example.aulaifood.databinding.FragmentLojaBinding
 import com.example.aulaifood.domain.model.Loja
+import com.example.aulaifood.domain.model.TipoProduto
 import com.example.aulaifood.presentation.ui.adapter.ProdutosAdapter
 import com.example.aulaifood.presentation.viewmodel.LojaViewModel
 import com.example.aulaifood.presentation.viewmodel.ProdutoViewModel
@@ -21,6 +22,7 @@ import com.example.core.UIStatus
 import com.example.core.exibirMensagem
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.math.acos
 
 @AndroidEntryPoint
 class LojaFragment : Fragment() {
@@ -71,9 +73,21 @@ class LojaFragment : Fragment() {
                 }
                 is UIStatus.Sucesso ->{
                     alertaCarregamento.fechar()
-                    val produtos = uiStatus.dados
+
+                    val produtosSeparados = uiStatus.dados
+
+                    val produtoEmDestaque = produtosSeparados
+                        .find {
+                            it.tipo== TipoProduto.PRODUTOS_EM_DESTAQUE
+                        }?.lista ?: emptyList()
+
+                    val produtos = produtosSeparados
+                        .find {
+                            it.tipo== TipoProduto.PRODUTOS
+                        }?.lista ?: emptyList()
+
                     produtosAdapter.adicionarLista(produtos)
-                    produtosAdapterDestaque.adicionarLista(produtos)
+                    produtosAdapterDestaque.adicionarLista(produtoEmDestaque)
                 }
                 is UIStatus.carregando ->{
                     alertaCarregamento.exibir("Carregando produtos")
@@ -111,8 +125,11 @@ class LojaFragment : Fragment() {
                 val orientacao = RecyclerView.HORIZONTAL
                 produtosAdapterDestaque = ProdutosAdapter(orientacao){
                     produto ->
-                    val navController = findNavController()
-                    navController.navigate(R.id.action_lojaFragment_to_produtoFragment)
+                    val acao = LojaFragmentDirections.actionLojaFragmentToProdutoFragment(
+                        produto = produto,
+                        loja = loja
+                    )
+                    findNavController().navigate(acao)
                 }
                 rvDestaqueProdutosLoja.adapter = produtosAdapterDestaque
                 rvDestaqueProdutosLoja.layoutManager = LinearLayoutManager(context, orientacao, false)
@@ -124,8 +141,11 @@ class LojaFragment : Fragment() {
             val orientacao = RecyclerView.VERTICAL
             produtosAdapter = ProdutosAdapter(orientacao){
                     produto ->
-                val navController = findNavController()
-                navController.navigate(R.id.action_lojaFragment_to_produtoFragment)
+                val acao = LojaFragmentDirections.actionLojaFragmentToProdutoFragment(
+                    produto = produto,
+                    loja = loja
+                )
+                findNavController().navigate(acao)
             }
             rvProdutosLoja.adapter = produtosAdapter
             rvProdutosLoja.layoutManager = LinearLayoutManager(context, orientacao, false)

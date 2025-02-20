@@ -1,5 +1,6 @@
 package com.example.aulaifood.data.remote.firebase.repository.produto
 
+import com.example.aulaifood.domain.model.Opcional
 import com.example.aulaifood.domain.model.Produto
 import com.example.core.UIStatus
 import com.example.loja.util.ConstantesFirebase
@@ -13,7 +14,31 @@ class ProdutoRepositoryImpl @Inject constructor(
     private val firebaseFirestore: FirebaseFirestore
 ) : IProdutoRepository {
 
-
+    override suspend fun listarOpcionais(
+        idLoja: String,
+        idProduto: String,
+        uiStatus: (UIStatus<List<Opcional>>) -> Unit
+    ) {
+        try {
+            val refOpcional = firebaseFirestore
+                .collection(ConstantesFirebase.FIRESTORE_PRODUTOS)
+                .document(idLoja)
+                .collection(ConstantesFirebase.FIRESTORE_ITENS)
+                .document(idProduto)
+                .collection(ConstantesFirebase.FIRESTORE_OPCIONAIS)
+            val querySnapshot = refOpcional.get().await()
+            if (querySnapshot.documents.isNotEmpty()){
+                val listaOpcionais = querySnapshot.documents.mapNotNull { documentSnapshot ->
+                    documentSnapshot.toObject(Opcional::class.java)
+                }
+                uiStatus.invoke(UIStatus.Sucesso(listaOpcionais))
+        }else {
+            uiStatus.invoke(UIStatus.Sucesso(emptyList()))
+        }
+            } catch (erroListarOpcionais : Exception){
+            uiStatus.invoke(UIStatus.Erro("Erro ao listar opcionais"))
+            }
+        }
 
     override suspend fun listar(
         idLoja: String,

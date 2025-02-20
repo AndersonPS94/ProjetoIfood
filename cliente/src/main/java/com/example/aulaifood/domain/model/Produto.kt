@@ -31,3 +31,13 @@ data class Produto(
         return dados
     }
 }
+
+enum class TipoProduto{
+    PRODUTOS_EM_DESTAQUE,
+    PRODUTOS
+}
+
+data class ProdutosSeparados(
+    val tipo: TipoProduto,
+    val lista: List<Produto>
+)

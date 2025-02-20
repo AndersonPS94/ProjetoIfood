@@ -5,13 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aulaifood.R
 import com.example.aulaifood.databinding.FragmentProdutoBinding
-import com.example.aulaifood.domain.model.Opcional
+import com.example.aulaifood.domain.model.Loja
+import com.example.aulaifood.domain.model.Produto
 import com.example.aulaifood.presentation.ui.adapter.OpicionaisAdapter
+import com.example.aulaifood.presentation.viewmodel.ProdutoViewModel
+import com.example.core.AlertaCarregamento
+import com.example.core.UIStatus
+import com.example.core.exibirMensagem
+import com.jamiltondamasceno.core.formatarComoMoeda
+import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,18 +28,14 @@ class ProdutoFragment : Fragment() {
 
     private lateinit var binding: FragmentProdutoBinding
     private lateinit var opcionaisAdapter: OpicionaisAdapter
+    private val produtoFragmentArgs: ProdutoFragmentArgs by navArgs()
+    private lateinit var  loja: Loja
+    private lateinit var produto: Produto
+    private val produtoViewModel : ProdutoViewModel by viewModels()
+    private val alertaCarregamento by lazy {
+        AlertaCarregamento(requireContext())
 
-    private val opcionais = listOf(
-        Opcional("Maionese+", "Adicional de maionsese", "R$ 3,50", "https://static.ifood-static.com.br/image/upload/t_medium/pratos/7dc9afad-89c9-4719-9c9b-9210b35447bd/202408221859_1zkg25hxrlj.jpeg"),
-        Opcional("Carne 100% Bovina+", "Adicional de hamburguer 100% carne bovina", "R$ 5,00", "https://static.ifood-static.com.br/image/upload/t_medium/pratos/d2fccef3-7bf6-4f04-b2a5-0ce70a3afc97/202409091751_42udtixq9dn.jpeg"),
-        Opcional("Alface+", "Adicional de alface", "R$ 3,50", "https://static.ifood-static.com.br/image/upload/t_medium/pratos/7dc9afad-89c9-4719-9c9b-9210b35447bd/202408221855_5sgichmp7ad.jpeg"),
-        Opcional("Bacon+", "Adicional de bacon", "R$ 3,50", "https://static.ifood-static.com.br/image/upload/t_medium/pratos/7dc9afad-89c9-4719-9c9b-9210b35447bd/202408221859_kv8snz63as8.jpeg"),
-        Opcional("Tomate+", "Adiciional de tomate", "R$ 2,50", "https://static.ifood-static.com.br/image/upload/t_medium/pratos/7dc9afad-89c9-4719-9c9b-9210b35447bd/202408221858_epn3dgoij64.jpeg"),
-        Opcional("Fatia Queijo Cheddar+", "Adicional de queijo cheddar", "R$ 3,50", "https://static.ifood-static.com.br/image/upload/t_medium/pratos/7dc9afad-89c9-4719-9c9b-9210b35447bd/202408221852_73un6kg223m.jpeg"),
-        Opcional("Molho Especial+", "Adicionar molho especial", "R$ 3,50", "https://static.ifood-static.com.br/image/upload/t_medium/pratos/d2fccef3-7bf6-4f04-b2a5-0ce70a3afc97/202409091753_xmb5zznkqve.jpeg"),
-        Opcional("Picles+", "Adicional de picles", "R$ 3,50", "https://static.ifood-static.com.br/image/upload/t_medium/pratos/7dc9afad-89c9-4719-9c9b-9210b35447bd/202408221858_qvcgrckwwk.jpeg"),
-        Opcional("Cebola Reidratada+", "Adicional de cebola", "R$ 3,50", "https://static.ifood-static.com.br/image/upload/t_medium/pratos/d2fccef3-7bf6-4f04-b2a5-0ce70a3afc97/202409091748_qqhqyua162m.jpeg"),
-    )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,10 +52,60 @@ class ProdutoFragment : Fragment() {
 
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        exibirDadosProduto()
+        listarOpcionais()
+    }
+
+    private fun listarOpcionais() {
+        produtoViewModel.listarOpcionais(
+            loja.idLoja,
+            produto.id
+        ){ uiStatus ->
+            when(uiStatus){
+                is UIStatus.Erro ->{
+                    alertaCarregamento.fechar()
+                    activity?.exibirMensagem(uiStatus.erro)
+                }
+                is UIStatus.Sucesso ->{
+                    alertaCarregamento.fechar()
+                    val opcionais = uiStatus.dados
+                    opcionaisAdapter.adicionarLista(opcionais)
+                }
+                is UIStatus.carregando ->{
+                    alertaCarregamento.exibir("Carregando opcionais")
+                }
+            }
+
+        }
+    }
+
+    private fun exibirDadosProduto() {
+        loja = produtoFragmentArgs.loja
+        produto = produtoFragmentArgs.produto
+
+        if (produto.url.isNotEmpty()) {
+            Picasso.get()
+                .load(produto.url)
+                .into(binding.imageCapaProduto)
+        }
+        if (produto.nome.isNotEmpty()) {
+            binding.textNomeProdutoDetalhe.text = produto.nome
+        }
+        if (produto.descricao.isNotEmpty()) {
+            binding.textDescriOProdutoDetalhe.text = produto.descricao
+        }
+        if (produto.emDestaque == true) {
+            binding.textPrecoPodutoDetalhe.text = produto.precoDestaque.formatarComoMoeda()
+        } else {
+            binding.textPrecoPodutoDetalhe.text = produto.preco.formatarComoMoeda()
+        }
+    }
+
     private fun inicializarOpcionais() {
         with(binding) {
             opcionaisAdapter = OpicionaisAdapter()
-            opcionaisAdapter.adicionarLista(opcionais)
             rvOpcionaisProdutoDetalhe.adapter = opcionaisAdapter
             rvOpcionaisProdutoDetalhe.layoutManager = LinearLayoutManager(
             context, RecyclerView.VERTICAL, false)
@@ -61,7 +116,7 @@ class ProdutoFragment : Fragment() {
     private fun inicializarEventoClique() {
         val navController = findNavController()
         binding.btnProdutoVoltar.setOnClickListener {
-            navController.navigate(R.id.lojaFragment)
+            navController.popBackStack()
         }
         binding.btnAdicionarProdutoCarrinho.setOnClickListener {
             navController.navigate(R.id.lojaFragment)
