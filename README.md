@@ -57,6 +57,14 @@ Este projeto foi desenvolvido com as seguintes tecnologias:
 
 ✅ Data Binding para vinculação de dados à UI
 
+✅ Firebase
+
+ - Authentication: Para gerenciamento de usuários.​
+
+ - Realtime Database: Para armazenamento e sincronização de dados em tempo real.​
+
+ - Cloud Storage: Para armazenamento de imagens e outros arquivos.
+
 ---
 
 ## 📂 Estrutura do Projeto
