@@ -80,7 +80,7 @@ O projeto é modularizado em três principais módulos:
 ```
 
 
-📄 Aprendizados
+## 📄 Aprendizados
 Durante o desenvolvimento deste projeto, foram explorados os seguintes conceitos:
 
 ✅ Modularização de projetos Android
